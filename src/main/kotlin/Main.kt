@@ -1,9 +1,8 @@
-import org.slf4j.LoggerFactory
+import io.javalin.Javalin
 
-// Create a logger using SLF4J (Simple Logging Facade). SLF4J is designed to allow changing the logging implementation
-// at runtime while maintaining the logging interface throughout the code.
-val logger = LoggerFactory.getLogger("application")
-
-fun main (args: Array<String>) {
-    logger.debug("Hello World!")
+fun main () {
+    val app = Javalin.create().start(7000)
+    app.get("/ping") { ctx ->
+        ctx.json(mapOf("message" to "pong"))
+    }
 }
